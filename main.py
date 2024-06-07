@@ -6,7 +6,7 @@ from InfostoreApp import InfostoreApp
 def main(page: Page):
     page.title = "Infostore"
     page.window_min_height = 700
-    page.window_min_width = 1360
+    page.window_min_width = 700
 
     page.theme_mode = ThemeMode.LIGHT
     page.theme = Theme(color_scheme_seed=colors.BLUE_300)

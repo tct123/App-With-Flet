@@ -1,72 +1,72 @@
 # App-With-Flet
 
-## Descrição
-O projeto foi desenvolvido com o objetivo de estudar e praticar programação em Python, manipulação de banco de dados MySQL e Flet para criação de interfaces gráficas. A ideia era criar uma aplicação que permitisse gerenciar cadastro de usuários, clientes, produtos, vendas e controlar o estoque de forma simples e eficiente.
+## Description
+The project was developed with the aim of studying and practicing programming in Python, manipulating MySQL and Flet databases to create graphical interfaces. The idea was to create an application that would allow managing the registration of users, customers, products, sales and controlling stock in a simple and efficient way.
 
-O desafio foi elaborar um projeto do início ao fim, implementando todas as funcionalidades essenciais para o controle de estoque, ao mesmo tempo em que aprendia a utilizar as tecnologias mencionadas e aplicava conceitos de programação orientada a objetos para garantir a organização e escalabilidade do código.
+The challenge was to develop a project from start to finish, implementing all the essential functionalities for inventory control, while learning to use the mentioned technologies and applying object-oriented programming concepts to guarantee the organization and scalability of the code.
 
-## Funcionalidades
-- Autenticação de Usuário: O sistema possui uma tela de login para autenticação de usuários administradores.
-- Cadastro de Usuários: Permite a criação usuários.
-- Controle de Clientes: Permite cadastrar e editar informações de clientes.
-- Gerenciamento de Produtos: Possibilita cadastrar, editar e excluir produtos do estoque.
-- Registro de Vendas: Permite registrar vendas, associando os clientes e produtos envolvidos.
-- Controle de Estoque: Mantém atualizado o estoque de produtos com base nas vendas realizadas.
+## Functionalities
+- User Authentication: The system has a login screen for authentication of administrator users.
+- User Registration: Allows users to be created.
+- Customer Control: Allows you to register and edit customer information.
+- Product Management: Allows you to register, edit and delete products from stock.
+- Sales Record: Allows you to record sales, associating the customers and products involved.
+- Inventory Control: Keeps product stock updated based on sales made.
 
-## Tecnologias Utilizadas
-- Python
+## Technologies Used
+-Python
 - MySQL
-- Flet (interface gráfica)
+- Flet (graphical interface)
 
-## Telas:
+## Screens:
 
 Login:
 
 ![Login](Screens/Login.PNG)
 
-Tela Inicial:
+Home screen:
 
-![Tela Inicial](Screens/Home.PNG)
+![Home Screen](Screens/Home.PNG)
 
-Vendas:
+Sales:
 
-![Vendas](Screens/Sales.PNG)
+![Sales](Screens/Sales.PNG)
 
-Produtos:
+Products:
 
-![Produtos](Screens/Products.PNG)
+![Products](Screens/Products.PNG)
 
-Clientes:
+Customers:
 
-![Clientes](Screens/Customers.PNG)
+![Customers](Screens/Customers.PNG)
 
-Cadastro de Usuários:
+User registration:
 
-![Cadastro de Usuários](Screens/Users.PNG)
+![User Registration](Screens/Users.PNG)
 
-## Para testar:
-Para executar a aplicação, certifique-se de ter o Python e o MySQL instalados no seu sistema. Além disso, é recomendado criar um ambiente virtual para isolar as dependências do projeto.
+## To test:
+To run the application, make sure you have Python and MySQL installed on your system. Additionally, it is recommended to create a virtual environment to isolate project dependencies.
 
-1. Clone o repositório em sua máquina local:
-   - git clone https://github.com/HelioCard/App-With-Flet.git
-   - cd App-With-Flet
+1. Clone the repository to your local machine:
+ - git clone https://github.com/HelioCard/App-With-Flet.git
+ - cd App-With-Flet
 
-2. Instale as dependências do projeto:
-   - pip install -r requirements.txt
+2. Install project dependencies:
+ - pip install -r requirements.txt
 
-3. Acesse o MySQL. Crie seu banco de dados (schema) e execute o script da pasta "database_scripts" para criação das tabelas. Há duas opções:
-   - create_tables - structure_only.sql (somente criação das tabelas);
-   - create_tables - structure_and_some_data.sql (criação das tabelas e inserção de alguns dados para teste)
+3. Access MySQL. Create your database (schema) and run the script from the "database_scripts" folder to create the tables. There are two options:
+ - create_tables - structure_only.sql (only creating tables);
+ - create_tables - structure_and_some_data.sql (creating tables and inserting some data for testing)
 
-4. Execute o arquivo main.py. Digite qualquer texto nos campos "Usuário" e "Senha" e clique em "Login" para abrir a tela de configuração inicial do banco de dados. Insira seus dados de conexão e clique em "Salvar". As seguintes telas só abrem na primeira execução, quando ainda não houve configuração:
+4. Run the main.py file. Enter any text in the "User" and "Password" fields and click "Login" to open the initial database configuration screen. Enter your connection details and click "Save". The following screens only open on the first run, when there has been no configuration yet:
 
-![Configuração do Banco de Dados](Screens/Config_DB.PNG)
+![Database Configuration](Screens/Config_DB.PNG)
 
-5. Mais uma vez, digite qualquer texto nos campos "Usuário" e "Senha" e clique em "Login" para abrir a tela do cadastro de administrador. Preencha e clique em "Cadastrar":
-   
-![Criação do Primeiro Administrador](Screens/Config_Admin.PNG)
+5. Once again, enter any text in the "User" and "Password" fields and click "Login" to open the administrator registration screen. Fill in and click "Register":
 
-6. Faça o Login.
+![Creation of the First Administrator](Screens/Config_Admin.PNG)
+
+6. Login.
 
 
-O projeto foi desenvolvido com fins educacionais e para desenvolver habilidades em Python, MySQL e Flet. Sinta-se à vontade para explorar o código e adaptá-lo às suas necessidades. Caso tenha alguma dúvida ou sugestão, entre em contato: helio.card@yahoo.com.br
+The project was developed for educational purposes and to develop skills in Python, MySQL and Flet. Feel free to explore the code and adapt it to your needs. If you have any questions or suggestions, please contact: helio.card@yahoo.com.br

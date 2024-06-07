@@ -52,7 +52,7 @@ class Appbar(UserControl):
             on_click=self.logout,
         )
 
-        locale.setlocale(locale.LC_ALL, "pt_BR.utf8")
+        # locale.setlocale(locale.LC_ALL, "pt_BR.utf8")
 
     def build(self):
         self.app_barr = AppBar(

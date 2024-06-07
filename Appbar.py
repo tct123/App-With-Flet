@@ -22,6 +22,9 @@ from flet import (
 import datetime
 import locale
 from apscheduler.schedulers.blocking import BlockingScheduler
+from mylocale.TR import tr
+
+tr_file = "localisation.csv"
 
 
 class Appbar(UserControl):
@@ -36,14 +39,20 @@ class Appbar(UserControl):
 
         self.hour_text = Text("", size=15, weight=FontWeight.W_600)
         self.week_text = Text("", size=12, weight=FontWeight.W_200)
-        self.text_title = Text(value="Login", size=26, weight=FontWeight.W_500)
+        self.text_title = Text(
+            value=tr(csv_file=tr_file, target_key="APPBAR_TEXT_TITLE"),
+            size=26,
+            weight=FontWeight.W_500,
+        )
         self.btn_change_theme = IconButton(
             icon=icons.DARK_MODE_OUTLINED,
-            tooltip="Tema claro/escuro",
+            tooltip=tr(csv_file=tr_file, target_key="APPBAR_BTN_CHANGE_TOOLTIP"),
             on_click=self.change_theme,
         )
         self.text_user = Text(
-            "Faça o Login para acessar o sistema!", size=15, weight=FontWeight.W_600
+            tr(csv_file=tr_file, target_key="APPBAR_TEXT_USER"),
+            size=15,
+            weight=FontWeight.W_600,
         )
         self.btn_logout = IconButton(
             icon=icons.LOGOUT_OUTLINED,

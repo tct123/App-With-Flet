@@ -57,7 +57,7 @@ class Appbar(UserControl):
         self.btn_logout = IconButton(
             icon=icons.LOGOUT_OUTLINED,
             disabled=True,
-            tooltip="Logout",
+            tooltip=tr(csv_file=tr_file, target_key="APPBAR_BTN_LOGOUT"),
             on_click=self.logout,
         )
 
@@ -92,7 +92,10 @@ class Appbar(UserControl):
                 self.btn_change_theme,
                 PopupMenuButton(
                     icon=icons.COLOR_LENS_OUTLINED,
-                    tooltip="Trocar cor do tema",
+                    tooltip=tr(
+                        csv_file=tr_file,
+                        target_key="APPBAR_CHANGE_THEME_COLOUR_TOOLTIP",
+                    ),
                     items=[
                         PopupMenuItem(
                             content=Row(
@@ -101,7 +104,7 @@ class Appbar(UserControl):
                                         icons.COLOR_LENS_OUTLINED,
                                         color=colors.PURPLE_300,
                                     ),
-                                    Text("Roxo"),
+                                    Text(tr(csv_file=tr_file, target_key="PURPLE")),
                                 ]
                             ),
                             on_click=self.change_color_seed,
@@ -113,7 +116,7 @@ class Appbar(UserControl):
                                         icons.COLOR_LENS_OUTLINED,
                                         color=colors.ORANGE_300,
                                     ),
-                                    Text("Laranja"),
+                                    Text(tr(csv_file=tr_file, target_key="ORANGE")),
                                 ]
                             ),
                             on_click=self.change_color_seed,
@@ -125,7 +128,7 @@ class Appbar(UserControl):
                                         icons.COLOR_LENS_OUTLINED,
                                         color=colors.GREEN_300,
                                     ),
-                                    Text("Verde"),
+                                    Text(tr(csv_file=tr_file, target_key="GREEN")),
                                 ]
                             ),
                             on_click=self.change_color_seed,

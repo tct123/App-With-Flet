@@ -2,3 +2,8 @@ stringname,en_EN,pt_BR
 APPBAR_TEXT_TITLE,Login,Login
 APPBAR_BTN_CHANGE_TOOLTIP,Light/Dark Theme,Tema claro/escuro
 APPBAR_TEXT_USER,Log in to access the system!,Faça o Login para acessar o sistema!
+APPBAR_BTN_LOGOUT,Logout,Logout
+APPBAR_CHANGE_THEME_COLOUR_TOOLTIP,Change theme color,Trocar cor do tema
+PURPLE,Purple,Roxo
+ORANGE,Orange,Laranja
+GREEN,Green,Verde

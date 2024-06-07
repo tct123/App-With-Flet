@@ -4,6 +4,7 @@ import json
 
 from CreateConfig import CreateConfig
 
+
 class Config:
     def __init__(self, route) -> None:
         self.route = route
@@ -41,7 +42,7 @@ class Config:
     def set_permissions(self, name, permission):
         self.route.config.user_name = name
         self.route.config.permission = permission
-        
+
         self.route.menu.nnrail.destinations[2].visible = (
             self.route.config.permission == "Admin"
         )
@@ -61,6 +62,3 @@ class Config:
             self.set_config_data(config_dict)
         else:
             self.open_config_db()
-            
-
-    

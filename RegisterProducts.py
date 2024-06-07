@@ -1,11 +1,33 @@
-from flet import (UserControl, Row, Column, Container, Text, TextField, IconButton, DataTable, Dropdown,OutlinedButton, 
-                  DataRow, DataColumn, DataCell, icons, colors, TextThemeStyle, TextAlign, CrossAxisAlignment,
-                  VerticalDivider, ListView, MainAxisAlignment, dropdown)
+from flet import (
+    UserControl,
+    Row,
+    Column,
+    Container,
+    Text,
+    TextField,
+    IconButton,
+    DataTable,
+    Dropdown,
+    OutlinedButton,
+    DataRow,
+    DataColumn,
+    DataCell,
+    icons,
+    colors,
+    TextThemeStyle,
+    TextAlign,
+    CrossAxisAlignment,
+    VerticalDivider,
+    ListView,
+    MainAxisAlignment,
+    dropdown,
+)
 
 from Notification import Notification
 from CategoryBrand import Category, Brand
 from Database import ProductsDatabase, SalesDatabase
 from Validator import Validator
+
 
 class RegisterProducts(UserControl):
     def __init__(self, route):
@@ -13,32 +35,101 @@ class RegisterProducts(UserControl):
         self.route = route
 
         self.text_label = Text(value="Novo Produto:", style=TextThemeStyle.TITLE_LARGE)
-        self.tf_id = TextField(label="ID (Aut)", read_only=True, dense=True, expand=1, text_size=24)
-        self.tf_descr = TextField(label="Descrição", expand=4, text_size=24, dense=True, on_change=self.analyze_fields)
-        self.dp_category = Dropdown(label="Categoria", expand=2, on_change=self.analyze_fields)
-        self.btn_manage_categories = IconButton(icon=icons.ADD_CIRCLE_OUTLINE, icon_color=colors.PRIMARY, icon_size=32, on_click=self.manage_categories_clicked)
+        self.tf_id = TextField(
+            label="ID (Aut)", read_only=True, dense=True, expand=1, text_size=24
+        )
+        self.tf_descr = TextField(
+            label="Descrição",
+            expand=4,
+            text_size=24,
+            dense=True,
+            on_change=self.analyze_fields,
+        )
+        self.dp_category = Dropdown(
+            label="Categoria", expand=2, on_change=self.analyze_fields
+        )
+        self.btn_manage_categories = IconButton(
+            icon=icons.ADD_CIRCLE_OUTLINE,
+            icon_color=colors.PRIMARY,
+            icon_size=32,
+            on_click=self.manage_categories_clicked,
+        )
         self.dp_brand = Dropdown(label="Marca", expand=2, on_change=self.analyze_fields)
-        self.btn_manage_brands = IconButton(icon=icons.ADD_CIRCLE_OUTLINE, icon_color=colors.PRIMARY, icon_size=32, on_click=self.manage_brands_clicked)
-        self.tf_stock = TextField(label="Estoque", expand=1, text_align=TextAlign.CENTER, on_change=self.analyze_fields)
-        self.tf_min_stock = TextField(label="Est. Mínimo", expand=1, text_align=TextAlign.CENTER, on_change=self.analyze_fields)
-        self.tf_max_stock = TextField(label="Est. Máximo", expand=1, text_align=TextAlign.CENTER, on_change=self.analyze_fields)
-        self.tf_observ = TextField(label="Observação", expand=3, on_change=self.analyze_fields)
-        self.tf_costs = TextField(label="Custo", expand=2, prefix_text="R$", text_size=24, dense=True,  on_change=self.analyze_fields, on_blur=self.calc_margin)
-        self.tf_selling_price = TextField(label="Preço de Venda", expand=2, prefix_text="R$", text_size=24, dense=True,  on_change=self.analyze_fields, on_blur=self.calc_margin)
-        self.tf_margin = TextField(label="Margem", expand=1, suffix_text="%", text_align=TextAlign.RIGHT, text_size=24, dense=True,  on_change=self.analyze_fields, on_blur=self.calc_selling_price)
-        self.btn_add_save_products = OutlinedButton(text='Salvar', icon=icons.SAVE_OUTLINED, on_click=self.add_save_clicked)
-        self.btn_back = IconButton(tooltip='Voltar para "Produtos"', icon=icons.ARROW_BACK_OUTLINED, icon_size=32, on_click=self.back_clicked)
+        self.btn_manage_brands = IconButton(
+            icon=icons.ADD_CIRCLE_OUTLINE,
+            icon_color=colors.PRIMARY,
+            icon_size=32,
+            on_click=self.manage_brands_clicked,
+        )
+        self.tf_stock = TextField(
+            label="Estoque",
+            expand=1,
+            text_align=TextAlign.CENTER,
+            on_change=self.analyze_fields,
+        )
+        self.tf_min_stock = TextField(
+            label="Est. Mínimo",
+            expand=1,
+            text_align=TextAlign.CENTER,
+            on_change=self.analyze_fields,
+        )
+        self.tf_max_stock = TextField(
+            label="Est. Máximo",
+            expand=1,
+            text_align=TextAlign.CENTER,
+            on_change=self.analyze_fields,
+        )
+        self.tf_observ = TextField(
+            label="Observação", expand=3, on_change=self.analyze_fields
+        )
+        self.tf_costs = TextField(
+            label="Custo",
+            expand=2,
+            prefix_text="R$",
+            text_size=24,
+            dense=True,
+            on_change=self.analyze_fields,
+            on_blur=self.calc_margin,
+        )
+        self.tf_selling_price = TextField(
+            label="Preço de Venda",
+            expand=2,
+            prefix_text="R$",
+            text_size=24,
+            dense=True,
+            on_change=self.analyze_fields,
+            on_blur=self.calc_margin,
+        )
+        self.tf_margin = TextField(
+            label="Margem",
+            expand=1,
+            suffix_text="%",
+            text_align=TextAlign.RIGHT,
+            text_size=24,
+            dense=True,
+            on_change=self.analyze_fields,
+            on_blur=self.calc_selling_price,
+        )
+        self.btn_add_save_products = OutlinedButton(
+            text="Salvar", icon=icons.SAVE_OUTLINED, on_click=self.add_save_clicked
+        )
+        self.btn_back = IconButton(
+            tooltip='Voltar para "Produtos"',
+            icon=icons.ARROW_BACK_OUTLINED,
+            icon_size=32,
+            on_click=self.back_clicked,
+        )
 
         self.dt_order_history = DataTable(
             column_spacing=15,
             divider_thickness=0.4,
-            #heading_row_color=colors.ON_INVERSE_SURFACE,
+            # heading_row_color=colors.ON_INVERSE_SURFACE,
             expand=True,
             columns=[
-                DataColumn(Text('Pedido')), 
-                DataColumn(Text('Data')), 
-                DataColumn(Text('Valor')),
-                DataColumn(Text('Ver')),                                                 
+                DataColumn(Text("Pedido")),
+                DataColumn(Text("Data")),
+                DataColumn(Text("Valor")),
+                DataColumn(Text("Ver")),
             ],
         )
 
@@ -46,7 +137,7 @@ class RegisterProducts(UserControl):
 
     def build(self):
         page_content = Container(
-            #bgcolor='red',
+            # bgcolor='red',
             padding=0,
             border_radius=5,
             expand=True,
@@ -54,25 +145,24 @@ class RegisterProducts(UserControl):
                 controls=[
                     # Corpo principal
                     Container(
-                        #bgcolor='white',
+                        # bgcolor='white',
                         expand=True,
                         content=Row(
                             vertical_alignment=CrossAxisAlignment.START,
                             controls=[
                                 Container(
-                                    #bgcolor='red',
+                                    # bgcolor='red',
                                     expand=5,
                                     border_radius=5,
                                     padding=15,
                                     content=Column(
                                         expand=True,
-                                        
                                         horizontal_alignment=CrossAxisAlignment.CENTER,
                                         controls=[
                                             Row(
                                                 controls=[
                                                     self.text_label,
-                                                    Row(expand=True), #spacer
+                                                    Row(expand=True),  # spacer
                                                     self.btn_back,
                                                 ]
                                             ),
@@ -93,7 +183,10 @@ class RegisterProducts(UserControl):
                                             ),
                                             Row(
                                                 controls=[
-                                                    Text(value="Estoque:", style=TextThemeStyle.TITLE_LARGE),
+                                                    Text(
+                                                        value="Estoque:",
+                                                        style=TextThemeStyle.TITLE_LARGE,
+                                                    ),
                                                 ]
                                             ),
                                             Row(
@@ -106,7 +199,10 @@ class RegisterProducts(UserControl):
                                             ),
                                             Row(
                                                 controls=[
-                                                    Text(value="Preços:", style=TextThemeStyle.TITLE_LARGE),
+                                                    Text(
+                                                        value="Preços:",
+                                                        style=TextThemeStyle.TITLE_LARGE,
+                                                    ),
                                                 ]
                                             ),
                                             Row(
@@ -121,14 +217,14 @@ class RegisterProducts(UserControl):
                                                 alignment=MainAxisAlignment.END,
                                                 controls=[
                                                     self.btn_add_save_products,
-                                                ]
+                                                ],
                                             ),
-                                        ]
-                                    )
+                                        ],
+                                    ),
                                 ),
                                 VerticalDivider(width=1),
                                 Container(
-                                    #bgcolor='red',
+                                    # bgcolor='red',
                                     expand=2,
                                     border_radius=5,
                                     padding=15,
@@ -137,28 +233,34 @@ class RegisterProducts(UserControl):
                                         horizontal_alignment=CrossAxisAlignment.CENTER,
                                         spacing=20,
                                         controls=[
-                                            Text(value="Histórico de Vendas", style=TextThemeStyle.TITLE_MEDIUM),
+                                            Text(
+                                                value="Histórico de Vendas",
+                                                style=TextThemeStyle.TITLE_MEDIUM,
+                                            ),
                                             ListView(
                                                 expand=True,
                                                 controls=[
                                                     self.dt_order_history,
-                                                ]
+                                                ],
                                             ),
                                             Row(
                                                 alignment=MainAxisAlignment.END,
                                                 controls=[
-                                                    Text('Total:', style=TextThemeStyle.TITLE_MEDIUM),
+                                                    Text(
+                                                        "Total:",
+                                                        style=TextThemeStyle.TITLE_MEDIUM,
+                                                    ),
                                                     self.text_total,
-                                                ]
-                                            )
-                                        ]
-                                    )
-                                )
-                            ]
-                        )
+                                                ],
+                                            ),
+                                        ],
+                                    ),
+                                ),
+                            ],
+                        ),
                     )
                 ]
-            )
+            ),
         )
 
         content = Row(
@@ -166,10 +268,10 @@ class RegisterProducts(UserControl):
             spacing=10,
             controls=[
                 page_content,
-            ]
+            ],
         )
         return content
-    
+
     def initialize(self):
         print("Initializing Register Products Page")
         self.load_categories()
@@ -189,7 +291,7 @@ class RegisterProducts(UserControl):
         dialog.open = True
         self.route.page.update()
         dialog.load_category()
-    
+
     def manage_brands_clicked(self, e):
         dialog = Brand(self)
         self.route.page.dialog = dialog
@@ -213,22 +315,22 @@ class RegisterProducts(UserControl):
         mydb.connect()
         result = mydb.select_brand()
         mydb.close()
-        
+
         self.dp_brand.options.clear()
         for data in result:
             self.dp_brand.options.append(dropdown.Option(data[1]))
         self.dp_brand.update()
-    
+
     def validate_int_fields(self, e):
         fields = [self.tf_stock, self.tf_min_stock, self.tf_max_stock]
         for control in fields:
             if control.value != "":
                 value = Validator.format_to_int(control.value)
                 if value is not None and value >= 0:
-                    control.error_text = ""    
+                    control.error_text = ""
                 else:
                     control.error_text = "Valor inválido!"
-                    self.btn_add_save_products.disabled = True         
+                    self.btn_add_save_products.disabled = True
         self.update()
 
     def validate_float_fields(self, e):
@@ -237,10 +339,10 @@ class RegisterProducts(UserControl):
             if control.value != "":
                 value = Validator.format_to_float(control.value)
                 if value is not None and value >= 0:
-                    control.error_text = ""    
+                    control.error_text = ""
                 else:
                     control.error_text = "Valor inválido!"
-                    self.btn_add_save_products.disabled = True         
+                    self.btn_add_save_products.disabled = True
         self.update()
 
     def calc_margin(self, e):
@@ -270,21 +372,32 @@ class RegisterProducts(UserControl):
         if cost != 0:
             selling_price = margin / 100 * cost + cost
         else:
-            Notification(self.route.page, "Não é possível calcular o preço de venda com base na margem, pois o custo é R$0,00!", "red").show_message()
+            Notification(
+                self.route.page,
+                "Não é possível calcular o preço de venda com base na margem, pois o custo é R$0,00!",
+                "red",
+            ).show_message()
             return
 
         self.tf_costs.value = Validator.format_to_currency(cost)
         self.tf_margin.value = Validator.format_to_currency(margin)
         self.tf_selling_price.value = Validator.format_to_currency(selling_price)
         self.tf_selling_price.update()
-        
+
         self.analyze_fields(e)
 
     def clear_fields(self):
-        for control in [self.tf_id, self.tf_descr, 
-                        self.tf_stock, self.tf_min_stock,
-                        self.tf_max_stock, self.tf_observ, self.tf_costs,
-                        self.tf_selling_price, self.tf_margin]:
+        for control in [
+            self.tf_id,
+            self.tf_descr,
+            self.tf_stock,
+            self.tf_min_stock,
+            self.tf_max_stock,
+            self.tf_observ,
+            self.tf_costs,
+            self.tf_selling_price,
+            self.tf_margin,
+        ]:
             control.value = ""
             control.error_text = ""
         self.dp_category.value = ""
@@ -296,15 +409,23 @@ class RegisterProducts(UserControl):
         self.update()
 
     def analyze_fields(self, e):
-        
+
         required_fields = [
-            self.tf_descr, self.dp_category, self.dp_brand, self.tf_stock, self.tf_min_stock,
-            self.tf_max_stock, self.tf_costs, self.tf_selling_price,
-            self.tf_margin
+            self.tf_descr,
+            self.dp_category,
+            self.dp_brand,
+            self.tf_stock,
+            self.tf_min_stock,
+            self.tf_max_stock,
+            self.tf_costs,
+            self.tf_selling_price,
+            self.tf_margin,
         ]
 
         all_fields_filled = all(control.value != "" for control in required_fields)
-        all_fields_empty = all(control.value == "" or None for control in required_fields)
+        all_fields_empty = all(
+            control.value == "" or None for control in required_fields
+        )
 
         for control in required_fields:
             control.error_text = "" if control.value != "" else "Campo obrigatório"
@@ -324,9 +445,21 @@ class RegisterProducts(UserControl):
         result = mydb.select_products_full(id)
         mydb.close()
 
-        for index, control in enumerate([self.tf_id, self.tf_descr, self.dp_category, self.dp_brand,
-                        self.tf_stock, self.tf_min_stock, self.tf_max_stock, self.tf_observ,
-                        self.tf_costs, self.tf_selling_price, self.tf_margin]):
+        for index, control in enumerate(
+            [
+                self.tf_id,
+                self.tf_descr,
+                self.dp_category,
+                self.dp_brand,
+                self.tf_stock,
+                self.tf_min_stock,
+                self.tf_max_stock,
+                self.tf_observ,
+                self.tf_costs,
+                self.tf_selling_price,
+                self.tf_margin,
+            ]
+        ):
             control.value = result[index]
             if index in [8, 9, 10]:
                 control.value = Validator.format_to_currency(float(control.value))
@@ -351,17 +484,21 @@ class RegisterProducts(UserControl):
             Validator.format_to_float(self.tf_selling_price.value),
             Validator.format_to_float(self.tf_margin.value),
         ]
-        
+
         mydb = ProductsDatabase(self.route)
         mydb.connect()
         result = mydb.register_products(fulldataset)
         mydb.close()
 
         if result == "success":
-            Notification(self.page, "Produto registrado com sucesso", "green").show_message()
+            Notification(
+                self.page, "Produto registrado com sucesso", "green"
+            ).show_message()
         else:
-            Notification(self.page, f"Erro ao atualizar o produto: {result}", "red").show_message()
-        
+            Notification(
+                self.page, f"Erro ao atualizar o produto: {result}", "red"
+            ).show_message()
+
         self.clear_fields()
 
     def update_product(self, e):
@@ -378,16 +515,20 @@ class RegisterProducts(UserControl):
             Validator.format_to_float(self.tf_selling_price.value),
             Validator.format_to_float(self.tf_margin.value),
         ]
-        
+
         mydb = ProductsDatabase(self.route)
         mydb.connect()
         result = mydb.update_products(fulldataset)
         mydb.close()
 
         if result == "success":
-            Notification(self.page, "Produto atualizado com sucesso", "green").show_message()
+            Notification(
+                self.page, "Produto atualizado com sucesso", "green"
+            ).show_message()
         else:
-            Notification(self.page, f"Erro ao atualizar o produto: {result}", "red").show_message()
+            Notification(
+                self.page, f"Erro ao atualizar o produto: {result}", "red"
+            ).show_message()
 
         self.back_clicked(e)
 
@@ -410,8 +551,18 @@ class RegisterProducts(UserControl):
                     cells=[
                         DataCell(Text(data[0])),
                         DataCell(Text(data[1])),
-                        DataCell(Text(value=f"R${Validator.format_to_currency(data[2])}")),
-                        DataCell(IconButton(icon=icons.VISIBILITY_OUTLINED, icon_color="blue", tooltip="Ver pedido", data=data[0], on_click=self.see_sale_clicked)),
+                        DataCell(
+                            Text(value=f"R${Validator.format_to_currency(data[2])}")
+                        ),
+                        DataCell(
+                            IconButton(
+                                icon=icons.VISIBILITY_OUTLINED,
+                                icon_color="blue",
+                                tooltip="Ver pedido",
+                                data=data[0],
+                                on_click=self.see_sale_clicked,
+                            )
+                        ),
                     ]
                 )
             )

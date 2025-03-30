@@ -3,6 +3,7 @@ import mysql.connector
 from datetime import date, timedelta
 import bcrypt
 
+
 class UserDatabase:
     def __init__(self, route) -> None:
         self.route = route
@@ -13,48 +14,50 @@ class UserDatabase:
             user=self.route.config.user,
             passwd=self.route.config.passwd,
             database=self.route.config.database,
-            port=self.route.config.port
+            port=self.route.config.port,
         )
-    
+
     def close(self):
         with contextlib.suppress(Exception):
             self.connection.close()
 
     def register_user(self, fullDataSet):
-        camposTabela = ('name, user, password, date, acesso')
-        qntd = ('%s, %s, %s, %s, %s')
+        camposTabela = "name, user, password, date, acesso"
+        qntd = "%s, %s, %s, %s, %s"
         sql = f"INSERT INTO users ({camposTabela}) VALUES ({qntd})"
         mycursor = self.connection.cursor()
         try:
             mycursor.execute(sql, fullDataSet)
             self.connection.commit()
-            return 'success'
-        except Exception as e:            
+            return "success"
+        except Exception as e:
             return str(e)
-        
+
     def select_all_users(self):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
-            mycursor.execute('SELECT idUser, name, user, acesso FROM users ORDER BY name')
+            mycursor.execute(
+                "SELECT idUser, name, user, acesso FROM users ORDER BY name"
+            )
             return mycursor.fetchall()
-        
+
     def select_one_user(self, id):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
-            sql = 'SELECT * FROM users WHERE idUser = %s'
+            sql = "SELECT * FROM users WHERE idUser = %s"
             mycursor.execute(sql, (int(id),))
             return mycursor.fetchone()
 
     def delete_user(self, id):
         try:
             mycursor = self.connection.cursor()
-            sql = 'DELETE FROM users WHERE idUser = %s'
+            sql = "DELETE FROM users WHERE idUser = %s"
             mycursor.execute(sql, (id,))
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return str(e)
-        
+
     def update_user(self, fullDataSet):
         try:
             mycursor = self.connection.cursor()
@@ -70,13 +73,13 @@ class UserDatabase:
             """
             mycursor.execute(sql, fullDataSet[1:] + fullDataSet[:1])
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return str(e)
-       
+
     def verify_pass(self, password, saved_hash):
-        return bcrypt.checkpw(password.encode('utf-8'), saved_hash.encode('utf-8'))
-    
+        return bcrypt.checkpw(password.encode("utf-8"), saved_hash.encode("utf-8"))
+
     def login_verify(self, data):
         try:
             mycursor = self.connection.cursor()
@@ -87,14 +90,14 @@ class UserDatabase:
             """
             mycursor.execute(query, (data[0],))
             result = mycursor.fetchone()
-            
+
             if result:
                 if self.verify_pass(data[1], result[1]):
                     return result[0].upper(), result[2]
             return None, None
         except Exception:
             return None, None
-        
+
     def find_user(self, text):
         try:
             mycursor = self.connection.cursor()
@@ -104,13 +107,14 @@ class UserDatabase:
             return mycursor.fetchall()
         except Exception:
             return None
-        
+
     def select_users_count(self):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
             sql = "SELECT COUNT(*) AS numb_of_users FROM users"
             mycursor.execute(sql)
             return str(mycursor.fetchone()[0])
+
 
 class CustomerDatabase:
     def __init__(self, route) -> None:
@@ -122,7 +126,7 @@ class CustomerDatabase:
             user=self.route.config.user,
             passwd=self.route.config.passwd,
             database=self.route.config.database,
-            port=self.route.config.port    
+            port=self.route.config.port,
         )
 
     def close(self):
@@ -130,35 +134,37 @@ class CustomerDatabase:
             self.connection.close()
 
     def register_customer(self, fullDataSet):
-        table_fields = ('name, cpf_cnpj, tel, email, observ, date')
-        placeholders = ('%s, %s, %s, %s, %s, %s')
+        table_fields = "name, cpf_cnpj, tel, email, observ, date"
+        placeholders = "%s, %s, %s, %s, %s, %s"
         query = f"INSERT INTO customers ({table_fields}) VALUES ({placeholders})"
         mycursor = self.connection.cursor()
         try:
             mycursor.execute(query, fullDataSet)
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return str(e)
-        
+
     def register_adress(self, fullDataSet):
-        table_fields = ('cod_customer, ender, cidade, uf, CEP')
-        placeholders = ('%s, %s, %s, %s, %s')
+        table_fields = "cod_customer, ender, cidade, uf, CEP"
+        placeholders = "%s, %s, %s, %s, %s"
         query = f"INSERT INTO adress ({table_fields}) VALUES ({placeholders})"
         mycursor = self.connection.cursor()
         try:
             mycursor.execute(query, fullDataSet)
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return str(e)
 
     def select_customers(self):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
-            mycursor.execute("SELECT idcustomers, name, cpf_cnpj, tel FROM customers ORDER BY name")
+            mycursor.execute(
+                "SELECT idcustomers, name, cpf_cnpj, tel FROM customers ORDER BY name"
+            )
             return mycursor.fetchall()
-        
+
     def select_one_customer(self, cpf_cnpj):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
@@ -166,7 +172,7 @@ class CustomerDatabase:
             mycursor.execute(query, (cpf_cnpj,))
             data_customer = mycursor.fetchall()
             return data_customer
-    
+
     def select_adresses(self, cpf_cnpj):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
@@ -190,7 +196,7 @@ class CustomerDatabase:
             mycursor.execute(query_del, (cpfCust,))
             self.connection.commit()
 
-            #Atualiza os dados do cliente
+            # Atualiza os dados do cliente
             query_upd_Cust = """
             UPDATE customers SET
             name = %s,
@@ -203,11 +209,11 @@ class CustomerDatabase:
             """
             mycursor.execute(query_upd_Cust, data_customer[1:] + data_customer[:1])
             self.connection.commit()
-            return 'success'
+            return "success"
 
         except mysql.connector.Error as e:
             return str(e)
-        
+
     def delete_customer(self, cpf_cnpj):
         try:
             sql = "DELETE FROM adress WHERE cod_customer = %s"
@@ -222,7 +228,7 @@ class CustomerDatabase:
             mycursor = self.connection.cursor()
             mycursor.execute(sql, (cpf_cnpj,))
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return f"Erro ao excluir o Cliente: {str(e)}"
 
@@ -236,72 +242,73 @@ class CustomerDatabase:
         except Exception as e:
             return str(e)
 
+
 class ProductsDatabase:
     def __init__(self, route) -> None:
         self.route = route
 
     def connect(self):
-        self.connection=mysql.connector.connect(
+        self.connection = mysql.connector.connect(
             host=self.route.config.host,
             user=self.route.config.user,
             passwd=self.route.config.passwd,
             database=self.route.config.database,
-            port=self.route.config.port
+            port=self.route.config.port,
         )
 
     def close(self):
         with contextlib.suppress(Exception):
-            self.connection.close()        
-        
+            self.connection.close()
+
     def register_category(self, category):
-        query = 'INSERT INTO category (category) VALUES (%s);'
+        query = "INSERT INTO category (category) VALUES (%s);"
         try:
             mycursor = self.connection.cursor()
-            mycursor.execute(query, (category, ))
+            mycursor.execute(query, (category,))
             self.connection.commit()
-            return 'success'
-        except Exception as e:
-            return e
-        
-    def register_brand(self, brand):
-        query = 'INSERT INTO brand (brand) VALUES (%s);'
-        try:
-            mycursor = self.connection.cursor()
-            mycursor.execute(query, (brand, ))
-            self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return e
 
-    def select_category(self):        
+    def register_brand(self, brand):
+        query = "INSERT INTO brand (brand) VALUES (%s);"
+        try:
+            mycursor = self.connection.cursor()
+            mycursor.execute(query, (brand,))
+            self.connection.commit()
+            return "success"
+        except Exception as e:
+            return e
+
+    def select_category(self):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
-            mycursor.execute('SELECT * FROM category ORDER BY category;')
+            mycursor.execute("SELECT * FROM category ORDER BY category;")
             return mycursor.fetchall()
 
     def select_brand(self):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
-            mycursor.execute('SELECT * FROM brand ORDER BY brand;')
+            mycursor.execute("SELECT * FROM brand ORDER BY brand;")
             return mycursor.fetchall()
 
     def delete_category(self, idcategory):
         try:
             mycursor = self.connection.cursor()
-            sql = 'DELETE FROM category WHERE idcategory = %s;'
-            mycursor.execute(sql, (idcategory, ))
+            sql = "DELETE FROM category WHERE idcategory = %s;"
+            mycursor.execute(sql, (idcategory,))
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return e
-        
+
     def delete_brand(self, idbrand):
         try:
             mycursor = self.connection.cursor()
-            sql = 'DELETE FROM brand WHERE idbrand = %s;'
-            mycursor.execute(sql, (idbrand, ))
+            sql = "DELETE FROM brand WHERE idbrand = %s;"
+            mycursor.execute(sql, (idbrand,))
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return e
 
@@ -310,26 +317,26 @@ class ProductsDatabase:
         try:
             fulldataset_2 = fulldataset
             mycursor = self.connection.cursor()
-            sql = 'SELECT idcategory FROM category WHERE category = %s'
-            mycursor.execute(sql, (fulldataset[1], ))
+            sql = "SELECT idcategory FROM category WHERE category = %s"
+            mycursor.execute(sql, (fulldataset[1],))
             result = mycursor.fetchall()
             fulldataset_2[1] = result[0][0]
-            sql = 'SELECT idbrand FROM brand WHERE brand = %s'
-            mycursor.execute(sql, (fulldataset[2], ))
+            sql = "SELECT idbrand FROM brand WHERE brand = %s"
+            mycursor.execute(sql, (fulldataset[2],))
             result = mycursor.fetchall()
             fulldataset_2[2] = result[0][0]
         except Exception as e:
             return e
-        
+
         # Inicia o processo de registro
-        table_fields = ('descr, idcategory, idbrand, stock, minstock, maxstock, observ, costs, sellprice, margin')
-        quantity = ('%s, %s, %s, %s, %s, %s, %s, %s, %s, %s')
-        query = f'INSERT INTO products ({table_fields}) VALUES ({quantity})'
+        table_fields = "descr, idcategory, idbrand, stock, minstock, maxstock, observ, costs, sellprice, margin"
+        quantity = "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s"
+        query = f"INSERT INTO products ({table_fields}) VALUES ({quantity})"
         mycursor = self.connection.cursor()
         try:
             mycursor.execute(query, fulldataset_2)
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return e
 
@@ -347,7 +354,7 @@ class ProductsDatabase:
             return mycursor.fetchall()
         except Exception as e:
             return e
-    
+
     def select_products_full(self, idproducts):
         try:
             mycursor = self.connection.cursor()
@@ -369,7 +376,7 @@ class ProductsDatabase:
                 JOIN brand ON products.idbrand = brand.idbrand
                 WHERE IDPRODUCTS = %s
             """
-            mycursor.execute(sql, (idproducts, ))
+            mycursor.execute(sql, (idproducts,))
             return mycursor.fetchone()
         except Exception as e:
             print(e)
@@ -381,7 +388,7 @@ class ProductsDatabase:
             sql = "SELECT category.idcategory, brand.idbrand FROM category JOIN brand ON category.category = %s AND brand.brand = %s"
             mycursor.execute(sql, (data_products[2], data_products[3]))
             data_products[2], data_products[3] = mycursor.fetchone()
-            
+
             sql = """
                 UPDATE products SET
                 descr = %s,
@@ -399,7 +406,7 @@ class ProductsDatabase:
             """
             mycursor.execute(sql, data_products[1:] + data_products[:1])
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return e
 
@@ -409,7 +416,7 @@ class ProductsDatabase:
             sql = "DELETE FROM products WHERE idproducts = %s"
             mycursor.execute(sql, (id_product,))
             self.connection.commit()
-            return 'success'
+            return "success"
         except Exception as e:
             return e
 
@@ -417,7 +424,7 @@ class ProductsDatabase:
         try:
             # Pesquisa todos os dados da tabela produtos por id, ou por descrição ou por marca ou por categoria ou por preço de venda
             mycursor = self.connection.cursor()
-            param = f'%{text}%'
+            param = f"%{text}%"
             sql = """
                 SELECT DISTINCT CAST(products.idproducts AS CHAR) AS id_str, products.descr, category.category, brand.brand, FORMAT(products.sellprice, 2, 'DE_de') AS sell, products.stock, products.minstock
                 FROM products
@@ -441,7 +448,7 @@ class ProductsDatabase:
                 JOIN brand ON products.idbrand = brand.idbrand
                 WHERE idproducts = %s
             """
-            mycursor.execute(sql, (id, ))
+            mycursor.execute(sql, (id,))
             result = mycursor.fetchone()
             return result or None
         except Exception as e:
@@ -450,19 +457,19 @@ class ProductsDatabase:
     def find_product_by_description(self, descr):
         try:
             mycursor = self.connection.cursor()
-            param = f'%{descr}%'
+            param = f"%{descr}%"
             sql = """
                 SELECT products.idproducts, products.descr, products.idcategory, products.idbrand, products.sellprice, products.costs, products.stock, brand.brand
                 FROM products
                 JOIN brand ON products.idbrand = brand.idbrand
                 WHERE descr LIKE %s
             """
-            mycursor.execute(sql, (param, ))
+            mycursor.execute(sql, (param,))
             result = mycursor.fetchall()
             return result[0] if result else None
         except Exception as e:
             return e
-    
+
     def update_stock(self, data):
         try:
             mycursor = self.connection.cursor()
@@ -472,7 +479,7 @@ class ProductsDatabase:
             return "success"
         except Exception as e:
             return e
-        
+
     def select_low_stock(self):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
@@ -487,6 +494,7 @@ class ProductsDatabase:
             mycursor.execute(sql)
             return mycursor.fetchall()
 
+
 class SalesDatabase:
     def __init__(self, route) -> None:
         self.route = route
@@ -497,16 +505,16 @@ class SalesDatabase:
             user=self.route.config.user,
             passwd=self.route.config.passwd,
             database=self.route.config.database,
-            port=self.route.config.port
+            port=self.route.config.port,
         )
-    
+
     def close(self):
         with contextlib.suppress(Exception):
             self.connection.close()
 
     def register_sale(self, fulldataset):
-        table_fields = ("idcustomer, date, total")
-        quantity = ("%s, %s, %s")
+        table_fields = "idcustomer, date, total"
+        quantity = "%s, %s, %s"
         query = f"INSERT INTO sales ({table_fields}) VALUES ({quantity})"
         mycursor = self.connection.cursor()
         try:
@@ -519,8 +527,8 @@ class SalesDatabase:
             return None, e
 
     def register_sold_products(self, fulldataset):
-        table_fields = ("idsale, idproduct, quantity, unitprice, cost, total")
-        quantity = ("%s, %s, %s, %s, %s, %s")
+        table_fields = "idsale, idproduct, quantity, unitprice, cost, total"
+        quantity = "%s, %s, %s, %s, %s, %s"
         query = f"INSERT INTO soldproducts ({table_fields}) VALUES ({quantity})"
         mycursor = self.connection.cursor()
         try:
@@ -529,7 +537,7 @@ class SalesDatabase:
             return "success"
         except Exception as e:
             return e
-        
+
     def select_all_sales(self):
         try:
             mycursor = self.connection.cursor()
@@ -548,7 +556,7 @@ class SalesDatabase:
                 SELECT sales.idsale, sales.idcustomer, DATE_FORMAT(sales.date, '%d/%m/%Y'), sales.total, customers.name, customers.cpf_cnpj FROM sales
                 JOIN customers ON sales.idcustomer = customers.idcustomers WHERE idsale = %s;
             """
-            mycursor.execute(sql, (idsale, ))
+            mycursor.execute(sql, (idsale,))
             return mycursor.fetchone()
         except Exception:
             return None
@@ -563,7 +571,7 @@ class SalesDatabase:
                 JOIN brand ON products.idbrand = brand.idbrand
                 WHERE idsale = %s
             """
-            mycursor.execute(sql, (idsale, ))
+            mycursor.execute(sql, (idsale,))
             return mycursor.fetchall()
         except Exception:
             return None
@@ -591,7 +599,7 @@ class SalesDatabase:
         try:
             mycursor = self.connection.cursor()
             sql = "DELETE FROM soldproducts WHERE idsale = %s"
-            mycursor.execute(sql, (id_sale, ))
+            mycursor.execute(sql, (id_sale,))
             self.connection.commit()
             return "success"
         except Exception as e:
@@ -601,16 +609,16 @@ class SalesDatabase:
         try:
             mycursor = self.connection.cursor()
             sql = "DELETE FROM sales WHERE idsale = %s"
-            mycursor.execute(sql, (id_sale, ))
+            mycursor.execute(sql, (id_sale,))
             self.connection.commit()
             return "success"
         except Exception as e:
             return e
-    
+
     def find_sale(self, text):
         try:
             mycursor = self.connection.cursor()
-            param = f'%{text}%'
+            param = f"%{text}%"
             sql = """
                 SELECT sales.idsale, sales.idcustomer, DATE_FORMAT(sales.date, '%d/%m/%Y'), sales.total, customers.name, customers.cpf_cnpj
                 FROM sales
@@ -621,12 +629,12 @@ class SalesDatabase:
             return mycursor.fetchall()
         except Exception as e:
             return e
-    
+
     def select_sales_history(self, id_customer):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
             sql = "SELECT idsale, DATE_FORMAT(sales.date, '%d/%m/%Y'), total FROM sales WHERE idcustomer = %s ORDER BY sales.date"
-            mycursor.execute(sql, (id_customer, ))
+            mycursor.execute(sql, (id_customer,))
             return mycursor.fetchall()
 
     def select_sold_history(self, id_product):
@@ -651,7 +659,7 @@ class SalesDatabase:
             return mycursor.fetchall()
         except Exception:
             return None
-    
+
     def select_sales_from_previous_seven(self):
         limit_date = date.today() - timedelta(days=7)
         try:
@@ -665,7 +673,7 @@ class SalesDatabase:
             return mycursor.fetchall()
         except Exception:
             return None
-        
+
     def select_sales_from_today(self):
         today = date.today()
         try:
@@ -680,6 +688,7 @@ class SalesDatabase:
         except Exception:
             return None
 
+
 class DashboardDatabase:
     def __init__(self, route) -> None:
         self.route = route
@@ -690,7 +699,7 @@ class DashboardDatabase:
             user=self.route.config.user,
             passwd=self.route.config.passwd,
             database=self.route.config.database,
-            port=self.route.config.port
+            port=self.route.config.port,
         )
 
     def close(self):
@@ -713,7 +722,8 @@ class DashboardDatabase:
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
             # select the five most profitable products and return: product_id, profit_value, description
-            mycursor.execute("""SELECT
+            mycursor.execute(
+                """SELECT
                              soldproducts.idproduct,
                              CAST( SUM(soldproducts.total - (soldproducts.quantity * soldproducts.cost)) AS SIGNED INTEGER ) AS profit,
                              products.descr
@@ -721,7 +731,8 @@ class DashboardDatabase:
                              GROUP BY soldproducts.idproduct
                              ORDER BY profit DESC
                              LIMIT 5
-                             """)
+                             """
+            )
             return mycursor.fetchall()
 
     def select_sales_by_months(self, dates_data):
@@ -742,7 +753,9 @@ class DashboardDatabase:
             mycursor = self.connection.cursor()
             mycursor.execute("SELECT COUNT(*) AS numb_of_customers FROM customers")
             numb_of_customers = mycursor.fetchone()[0]
-            mycursor.execute(f"SELECT COUNT(*) AS numb_of_cutomers_past FROM customers WHERE date < '{first_day_of_month}'")
+            mycursor.execute(
+                f"SELECT COUNT(*) AS numb_of_cutomers_past FROM customers WHERE date < '{first_day_of_month}'"
+            )
             numb_of_customers_past = mycursor.fetchone()[0]
             return numb_of_customers, numb_of_customers_past
 
@@ -750,9 +763,11 @@ class DashboardDatabase:
         today = date.today()
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()
-            mycursor.execute(f"SELECT COUNT(*), SUM(total) FROM sales WHERE date = '{today}'")
+            mycursor.execute(
+                f"SELECT COUNT(*), SUM(total) FROM sales WHERE date = '{today}'"
+            )
             return mycursor.fetchone()
-        
+
     def select_numb_of_products_and_stock(self):
         with contextlib.suppress(Exception):
             mycursor = self.connection.cursor()

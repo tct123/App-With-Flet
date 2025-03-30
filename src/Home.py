@@ -1,5 +1,4 @@
 from flet import (
-    UserControl,
     Row,
     Column,
     Container,
@@ -15,7 +14,7 @@ from flet import (
     LineChartData,
     Border,
     ChartGridLines,
-    icons,
+    Icons,
     ChartAxis,
     LineChart,
     BorderSide,
@@ -43,7 +42,7 @@ from Database import DashboardDatabase
 from Validator import Validator
 
 
-class Home(UserControl):
+class Home(Container):
     def __init__(self, route):
         super().__init__()
         self.route = route
@@ -355,10 +354,10 @@ class Home(UserControl):
         self.text_variation_customers = Text("5%", color=colors.GREEN, size=22)
         self.btn_add_customer = OutlinedButton(
             text="Ad. Cliente",
-            icon=icons.ADD_OUTLINED,
+            icon=Icons.ADD_OUTLINED,
             on_click=self.add_customer_clicked,
         )
-        self.icon = Icon(name=icons.ARROW_DROP_UP, color="green")
+        self.icon = Icon(name=Icons.ARROW_DROP_UP, color="green")
         self.customer_card = Card(
             expand=True,
             surface_tint_color=colors.SURFACE_VARIANT,
@@ -381,7 +380,7 @@ class Home(UserControl):
                                     alignment="center",
                                     controls=[
                                         Icon(
-                                            name=icons.PERM_CONTACT_CALENDAR_OUTLINED,
+                                            name=Icons.PERM_CONTACT_CALENDAR_OUTLINED,
                                             color="primary",
                                             size=24,
                                         ),
@@ -418,7 +417,7 @@ class Home(UserControl):
         )
         self.text_today_billing = Text(value="R$0,00", color=colors.GREEN, size=22)
         self.btn_add_sale = OutlinedButton(
-            text="Nova Venda", icon=icons.ADD_OUTLINED, on_click=self.add_sale_clicked
+            text="Nova Venda", icon=Icons.ADD_OUTLINED, on_click=self.add_sale_clicked
         )
         self.sales_card = Card(
             expand=True,
@@ -442,7 +441,7 @@ class Home(UserControl):
                                     alignment="center",
                                     controls=[
                                         Icon(
-                                            name=icons.SHOPPING_CART_OUTLINED,
+                                            name=Icons.SHOPPING_CART_OUTLINED,
                                             color="primary",
                                             size=24,
                                         ),
@@ -492,7 +491,7 @@ class Home(UserControl):
         )
         self.btn_add_product = OutlinedButton(
             text="Ad. Produto",
-            icon=icons.ADD_OUTLINED,
+            icon=Icons.ADD_OUTLINED,
             on_click=self.add_product_clicked,
         )
         self.products_card = Card(
@@ -517,7 +516,7 @@ class Home(UserControl):
                                     alignment="center",
                                     controls=[
                                         Icon(
-                                            name=icons.INVENTORY_2_OUTLINED,
+                                            name=Icons.INVENTORY_2_OUTLINED,
                                             color="primary",
                                             size=24,
                                         ),
@@ -822,11 +821,11 @@ class Home(UserControl):
         if variation == 0:
             self.text_variation_customers.color = "on_surface_variant"
             self.icon.color = "on_surface_variant"
-            self.icon.name = icons.ARROW_RIGHT_OUTLINED
+            self.icon.name = Icons.ARROW_RIGHT_OUTLINED
         else:
             self.text_variation_customers.color = "green"
             self.icon.color = "green"
-            self.icon.name = icons.ARROW_DROP_UP_OUTLINED
+            self.icon.name = Icons.ARROW_DROP_UP_OUTLINED
         self.update()
 
     def get_today_sales_billing(self):

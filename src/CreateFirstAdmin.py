@@ -1,6 +1,6 @@
 from flet import (
     TextField,
-    icons,
+    Icons,
     Text,
     OutlinedButton,
     Column,
@@ -36,30 +36,30 @@ class CreateFirstAdmin(AlertDialog):
         self.tf_name = TextField(
             autofocus=True,
             label="Nome",
-            prefix_icon=icons.PERSON_2_ROUNDED,
+            prefix_icon=Icons.PERSON_2_ROUNDED,
             on_change=self.validate_fields,
         )
         self.tf_user = TextField(
             label="Usuário",
-            prefix_icon=icons.ASSIGNMENT_IND_ROUNDED,
+            prefix_icon=Icons.ASSIGNMENT_IND_ROUNDED,
             on_change=self.validate_fields,
         )
         self.tf_pass1 = TextField(
             label="Insira a senha",
             password=True,
-            prefix_icon=icons.PASSWORD,
+            prefix_icon=Icons.PASSWORD,
             on_change=self.validate_fields,
         )
         self.tf_pass2 = TextField(
             label="Repita a senha",
             password=True,
-            prefix_icon=icons.PASSWORD,
+            prefix_icon=Icons.PASSWORD,
             on_change=self.validate_fields,
         )
         self.btn_register_user = OutlinedButton(
             text="Cadastrar",
             disabled=True,
-            icon=icons.ADD_OUTLINED,
+            icon=Icons.ADD_OUTLINED,
             width=140,
             on_click=self.register_admin,
         )

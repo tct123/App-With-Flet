@@ -1,5 +1,4 @@
 from flet import (
-    UserControl,
     Row,
     Column,
     Container,
@@ -10,7 +9,7 @@ from flet import (
     DataRow,
     DataColumn,
     DataCell,
-    icons,
+    Icons,
     TextThemeStyle,
     TextAlign,
     VerticalDivider,
@@ -29,7 +28,7 @@ from Notification import Notification
 from Validator import Validator
 
 
-class Products(UserControl):
+class Products(Container):
     def __init__(self, route):
         super().__init__()
         self.route = route
@@ -38,27 +37,27 @@ class Products(UserControl):
             label="Buscar...",
             expand=True,
             dense=True,
-            prefix_icon=icons.SEARCH_ROUNDED,
+            prefix_icon=Icons.SEARCH_ROUNDED,
             on_change=self.find_products,
         )
         self.btn_see_low_stock = IconButton(
-            icon=icons.INVENTORY_OUTLINED,
+            icon=Icons.INVENTORY_OUTLINED,
             tooltip="Ver produtos com estoque baixo",
             on_click=self.see_low_stock_clicked,
         )
         self.btn_clear_filters = IconButton(
-            icon=icons.CLEAR_ALL_OUTLINED,
+            icon=Icons.CLEAR_ALL_OUTLINED,
             tooltip="Limpar Filtros",
             on_click=self.clear_filter_clicked,
         )
         self.btn_print = IconButton(
-            icon=icons.PICTURE_AS_PDF_OUTLINED,
+            icon=Icons.PICTURE_AS_PDF_OUTLINED,
             tooltip="Gerar arquivo .pdf",
             on_click=self.pdf_clicked,
         )
         self.btn_new_product = IconButton(
             tooltip="Adicionar Produto",
-            icon=icons.ADD_OUTLINED,
+            icon=Icons.ADD_OUTLINED,
             icon_color=colors.PRIMARY,
             icon_size=36,
             on_click=self.new_product_clicked,
@@ -258,13 +257,13 @@ class Products(UserControl):
                             Row(
                                 controls=[
                                     IconButton(
-                                        icon=icons.EDIT_OUTLINED,
+                                        icon=Icons.EDIT_OUTLINED,
                                         icon_color="blue",
                                         data=data[0],
                                         on_click=self.edit_clicked,
                                     ),
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         data=data[0],
                                         on_click=self.delete_clicked,
@@ -350,13 +349,13 @@ class Products(UserControl):
                                 spacing=0,
                                 controls=[
                                     IconButton(
-                                        icon=icons.EDIT_OUTLINED,
+                                        icon=Icons.EDIT_OUTLINED,
                                         icon_color="blue",
                                         data=data[0],
                                         on_click=self.edit_clicked,
                                     ),
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         data=data[0],
                                         on_click=self.delete_clicked,
@@ -443,7 +442,7 @@ class Products(UserControl):
                         ),
                         DataCell(
                             IconButton(
-                                icon=icons.VISIBILITY_OUTLINED,
+                                icon=Icons.VISIBILITY_OUTLINED,
                                 icon_color="blue",
                                 tooltip="Ver pedido",
                                 data=data[0],

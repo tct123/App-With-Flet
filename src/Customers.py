@@ -1,5 +1,4 @@
 from flet import (
-    UserControl,
     Row,
     Column,
     Container,
@@ -10,7 +9,7 @@ from flet import (
     DataRow,
     DataColumn,
     DataCell,
-    icons,
+    Icons,
     TextThemeStyle,
     VerticalDivider,
     ListView,
@@ -29,13 +28,13 @@ from Notification import Notification
 from Validator import Validator
 
 
-class Customers(UserControl):
+class Customers(Container):
     def __init__(self, route):
         super().__init__()
         self.route = route
 
         self.btn_clear_filters = IconButton(
-            icon=icons.CLEAR_ALL_OUTLINED,
+            icon=Icons.CLEAR_ALL_OUTLINED,
             tooltip="Limpar Filtros",
             on_click=self.clear_filter_clicked,
         )
@@ -43,16 +42,16 @@ class Customers(UserControl):
             label="Buscar...",
             expand=True,
             dense=True,
-            prefix_icon=icons.SEARCH_ROUNDED,
+            prefix_icon=Icons.SEARCH_ROUNDED,
             on_change=self.find_customers,
         )
         self.btn_print = IconButton(
-            icon=icons.PICTURE_AS_PDF_OUTLINED,
+            icon=Icons.PICTURE_AS_PDF_OUTLINED,
             tooltip="Gerar arquivo .pdf",
             on_click=self.pdf_clicked,
         )
         self.btn_new_customer = IconButton(
-            icon=icons.ADD_OUTLINED,
+            icon=Icons.ADD_OUTLINED,
             tooltip="Novo Cliente",
             icon_color="primary",
             icon_size=36,
@@ -83,13 +82,13 @@ class Customers(UserControl):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.EDIT_OUTLINED, icon_color="blue"
+                                        icon=Icons.EDIT_OUTLINED, icon_color="blue"
                                     ),
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED, icon_color="red"
+                                        icon=Icons.DELETE_OUTLINED, icon_color="red"
                                     ),
                                     IconButton(
-                                        icon=icons.ADD_SHOPPING_CART_OUTLINED,
+                                        icon=Icons.ADD_SHOPPING_CART_OUTLINED,
                                         icon_color="green",
                                     ),
                                 ]
@@ -265,21 +264,21 @@ class Customers(UserControl):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.EDIT_OUTLINED,
+                                        icon=Icons.EDIT_OUTLINED,
                                         icon_color="blue",
                                         data=data[2],
                                         tooltip="Editar Cliente",
                                         on_click=self.edit_clicked,
                                     ),
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         data=data[2],
                                         tooltip="Excluir Cliente",
                                         on_click=self.delete_clicked,
                                     ),
                                     IconButton(
-                                        icon=icons.ADD_SHOPPING_CART_OUTLINED,
+                                        icon=Icons.ADD_SHOPPING_CART_OUTLINED,
                                         icon_color="green",
                                         tooltip="Nova Venda",
                                         data=data[2],
@@ -359,21 +358,21 @@ class Customers(UserControl):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.EDIT_OUTLINED,
+                                        icon=Icons.EDIT_OUTLINED,
                                         icon_color="blue",
                                         data=data[2],
                                         tooltip="Editar cliente",
                                         on_click=self.edit_clicked,
                                     ),
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         data=data[2],
                                         tooltip="Excluir cliente",
                                         on_click=self.delete_clicked,
                                     ),
                                     IconButton(
-                                        icon=icons.ADD_SHOPPING_CART_OUTLINED,
+                                        icon=Icons.ADD_SHOPPING_CART_OUTLINED,
                                         icon_color="green",
                                         data=data[2],
                                         tooltip="Nova venda",
@@ -477,7 +476,7 @@ class Customers(UserControl):
                         DataCell(Text(f"R${Validator.format_to_currency(data[2])}")),
                         DataCell(
                             IconButton(
-                                icon=icons.VISIBILITY_OUTLINED,
+                                icon=Icons.VISIBILITY_OUTLINED,
                                 icon_color="blue",
                                 data=data[0],
                                 tooltip="Visualizar pedido",

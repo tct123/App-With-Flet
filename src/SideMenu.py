@@ -1,8 +1,7 @@
 from flet import (
-    UserControl,
     Container,
     IconButton,
-    icons,
+    Icons,
     NavigationRail,
     NavigationRailLabelType,
     NavigationRailDestination,
@@ -14,7 +13,7 @@ from flet import (
 from SetGeneralConfig import SetGeneralConfig
 
 
-class SideMenu(UserControl):
+class SideMenu(NavigationRail):
     def __init__(self, route):
         super().__init__()
         self.route = route
@@ -32,7 +31,7 @@ class SideMenu(UserControl):
             min_extended_width=160,
             bgcolor="transparent",
             leading=IconButton(
-                icon=icons.SWAP_HORIZ_ROUNDED,
+                icon=Icons.SWAP_HORIZ_ROUNDED,
                 icon_size=40,
                 tooltip="Mostrar/Ocultar Opções",
                 on_click=self.menu_clicked,
@@ -40,35 +39,35 @@ class SideMenu(UserControl):
             group_alignment=-0.95,
             destinations=[
                 NavigationRailDestination(
-                    icon=icons.COTTAGE_OUTLINED,
-                    selected_icon=icons.COTTAGE,
+                    icon=Icons.COTTAGE_OUTLINED,
+                    selected_icon=Icons.COTTAGE,
                     label="Home",
                 ),
                 NavigationRailDestination(
-                    icon_content=Icon(icons.PERM_CONTACT_CALENDAR_OUTLINED),
-                    selected_icon_content=Icon(icons.PERM_CONTACT_CALENDAR),
+                    icon_content=Icon(Icons.PERM_CONTACT_CALENDAR_OUTLINED),
+                    selected_icon_content=Icon(Icons.PERM_CONTACT_CALENDAR),
                     label="Clientes",
                 ),
                 NavigationRailDestination(
-                    icon_content=Icon(icons.PERSON_OUTLINED),
-                    selected_icon_content=Icon(icons.PERSON_ROUNDED),
+                    icon_content=Icon(Icons.PERSON_OUTLINED),
+                    selected_icon_content=Icon(Icons.PERSON_ROUNDED),
                     label="Usuários",
                 ),
                 NavigationRailDestination(
-                    icon_content=Icon(icons.INVENTORY_2_OUTLINED),
-                    selected_icon_content=Icon(icons.INVENTORY),
+                    icon_content=Icon(Icons.INVENTORY_2_OUTLINED),
+                    selected_icon_content=Icon(Icons.INVENTORY),
                     label="Produtos",
                 ),
                 NavigationRailDestination(
-                    icon_content=Icon(icons.SHOPPING_CART_OUTLINED),
-                    selected_icon_content=Icon(icons.SHOPPING_CART),
+                    icon_content=Icon(Icons.SHOPPING_CART_OUTLINED),
+                    selected_icon_content=Icon(Icons.SHOPPING_CART),
                     label="Vendas",
                 ),
                 # NavigationRailDestination(
-                #     icon=icons.SETTINGS_OUTLINED, selected_icon_content=Icon(icons.SETTINGS), label='Configurações',
+                #     icon=Icons.SETTINGS_OUTLINED, selected_icon_content=Icon(Icons.SETTINGS), label='Configurações',
                 # ),
             ],
-            trailing=IconButton(icon=icons.SETTINGS, on_click=self.show_config_page),
+            trailing=IconButton(icon=Icons.SETTINGS, on_click=self.show_config_page),
             on_change=self.nav_clicked,
         )
         self.cont.content = self.nnrail

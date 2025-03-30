@@ -1,5 +1,4 @@
 from flet import (
-    UserControl,
     SnackBar,
     Text,
     TextThemeStyle,
@@ -8,7 +7,7 @@ from flet import (
 )
 
 
-class Notification(UserControl):
+class Notification(SnackBar):
     def __init__(self, page, message, color):
         super().__init__()
         self.page = page

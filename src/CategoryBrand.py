@@ -13,7 +13,7 @@ from flet import (
     DataRow,
     DataCell,
     SnackBar,
-    icons,
+    Icons,
     colors,
 )
 from Database import ProductsDatabase
@@ -32,7 +32,7 @@ class Category(AlertDialog):
             label="Insira a nova categoria", dense=True, expand=True
         )
         self.btn_save = IconButton(
-            icon=icons.SAVE_OUTLINED,
+            icon=Icons.SAVE_OUTLINED,
             icon_color=colors.PRIMARY,
             icon_size=32,
             on_click=self.register_category,
@@ -99,7 +99,7 @@ class Category(AlertDialog):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         data=data[0],
                                         on_click=self.delete_category,
@@ -166,7 +166,7 @@ class Brand(AlertDialog):
             label="Insira a nova marca", dense=True, expand=True
         )
         self.btn_save = IconButton(
-            icon=icons.SAVE_OUTLINED,
+            icon=Icons.SAVE_OUTLINED,
             icon_color=colors.PRIMARY,
             icon_size=32,
             on_click=self.register_brand,
@@ -233,7 +233,7 @@ class Brand(AlertDialog):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         data=data[0],
                                         on_click=self.delete_brand,

@@ -1,5 +1,4 @@
 from flet import (
-    UserControl,
     Row,
     Column,
     Container,
@@ -24,7 +23,7 @@ import locale
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 
-class Appbar(UserControl):
+class Appbar(AppBar):
     def __init__(self, route):
         super().__init__()
         self.route = route

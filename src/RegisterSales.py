@@ -1,5 +1,4 @@
 from flet import (
-    UserControl,
     Row,
     Column,
     Container,
@@ -11,7 +10,7 @@ from flet import (
     DataColumn,
     DataCell,
     Switch,
-    icons,
+    Icons,
     colors,
     TextThemeStyle,
     TextAlign,
@@ -30,7 +29,7 @@ from SelectCustomer import SelectCustomer
 from SelectProduct import SelectProduct
 
 
-class RegisterSales(UserControl):
+class RegisterSales(Container):
     def __init__(self, route):
         super().__init__()
         self.route = route
@@ -93,14 +92,14 @@ class RegisterSales(UserControl):
             read_only=True,
         )
         self.btn_back = IconButton(
-            icon=icons.ARROW_BACK_OUTLINED,
+            icon=Icons.ARROW_BACK_OUTLINED,
             icon_size=32,
             tooltip='Voltar para "Vendas"',
             on_click=self.back_clicked,
         )
 
         self.btn_find_by_descr = IconButton(
-            icon=icons.SEARCH_ROUNDED,
+            icon=Icons.SEARCH_ROUNDED,
             icon_size=32,
             tooltip="Pesquisar Produtos",
             on_click=self.find_by_descr,
@@ -116,7 +115,7 @@ class RegisterSales(UserControl):
         self.tf_quantity2 = TextField(
             label="Quantidade",
             expand=1,
-            prefix_icon=icons.NUMBERS,
+            prefix_icon=Icons.NUMBERS,
             text_align=TextAlign.CENTER,
             dense=True,
             on_change=self.validate_fields,
@@ -124,14 +123,14 @@ class RegisterSales(UserControl):
         self.tf_discount = TextField(
             label="Desconto",
             expand=1,
-            prefix_icon=icons.REMOVE_CIRCLE_OUTLINE_OUTLINED,
+            prefix_icon=Icons.REMOVE_CIRCLE_OUTLINE_OUTLINED,
             dense=True,
             suffix_text="%",
             text_align=TextAlign.CENTER,
             on_change=self.validate_fields,
         )
         self.btn_include = IconButton(
-            icon=icons.ADD_CIRCLE_OUTLINE_OUTLINED,
+            icon=Icons.ADD_CIRCLE_OUTLINE_OUTLINED,
             tooltip="Incluir",
             icon_size=36,
             on_click=self.include_clicked,
@@ -168,17 +167,17 @@ class RegisterSales(UserControl):
             read_only=True,
         )
         self.btn_select_customer = IconButton(
-            icon=icons.SENSOR_OCCUPIED_OUTLINED,
+            icon=Icons.SENSOR_OCCUPIED_OUTLINED,
             tooltip="Selecionar Cliente",
             on_click=lambda e: asyncio.run(self.select_customer_clicked(e)),
         )
         self.btn_clear_sale = IconButton(
-            icon=icons.CLEANING_SERVICES_OUTLINED,
+            icon=Icons.CLEANING_SERVICES_OUTLINED,
             tooltip="Limpar Campos",
             on_click=self.clear_sale_clicked,
         )
         self.btn_close_sale = IconButton(
-            icon=icons.SHOPPING_CART_CHECKOUT_OUTLINED,
+            icon=Icons.SHOPPING_CART_CHECKOUT_OUTLINED,
             tooltip="Salvar Venda",
             icon_color="primary",
             icon_size=36,
@@ -236,7 +235,7 @@ class RegisterSales(UserControl):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         tooltip="Excluir Produto",
                                     )
@@ -674,7 +673,7 @@ class RegisterSales(UserControl):
                         ),
                         DataCell(
                             IconButton(
-                                icon=icons.DELETE_OUTLINED,
+                                icon=Icons.DELETE_OUTLINED,
                                 icon_color="red",
                                 data=row,
                                 on_click=self.delete_product,

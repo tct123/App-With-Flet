@@ -12,7 +12,7 @@ from flet import (
     DataColumn,
     DataRow,
     DataCell,
-    icons,
+    Icons,
 )
 from Database import CustomerDatabase
 
@@ -31,7 +31,7 @@ class SelectCustomer(AlertDialog):
         self.tf_find_customer = TextField(
             label="Buscar...",
             expand=True,
-            prefix_icon=icons.SEARCH_OUTLINED,
+            prefix_icon=Icons.SEARCH_OUTLINED,
             on_change=self.find_customer,
         )
         self.btn_back = TextButton(text="Voltar", on_click=self.back_clicked)
@@ -100,7 +100,7 @@ class SelectCustomer(AlertDialog):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.SENSOR_OCCUPIED_OUTLINED,
+                                        icon=Icons.SENSOR_OCCUPIED_OUTLINED,
                                         icon_color="blue",
                                         data=data,
                                         tooltip="Selecionar",

@@ -1,11 +1,10 @@
 from flet import (
-    UserControl,
     Row,
     Column,
     Container,
     Text,
     TextField,
-    icons,
+    Icons,
     colors,
     TextThemeStyle,
     OutlinedButton,
@@ -22,7 +21,7 @@ from Notification import Notification
 from CreateFirstAdmin import CreateFirstAdmin
 
 
-class Login(UserControl):
+class Login(Container):
     def __init__(self, route):
         super().__init__()
         self.route = route
@@ -30,14 +29,14 @@ class Login(UserControl):
     def build(self):
         self.text_user = TextField(
             label="Usuário",
-            prefix_icon=icons.PERSON_2_OUTLINED,
+            prefix_icon=Icons.PERSON_2_OUTLINED,
             expand=True,
             autofocus=True,
             on_change=self.analyze_to_enable_button,
         )
         self.text_password = TextField(
             label="Senha",
-            prefix_icon=icons.LOCK_OUTLINE_ROUNDED,
+            prefix_icon=Icons.LOCK_OUTLINE_ROUNDED,
             expand=True,
             password=True,
             can_reveal_password=True,
@@ -46,7 +45,7 @@ class Login(UserControl):
         self.btn_login = OutlinedButton(
             text="Login",
             width=240,
-            icon=icons.LOGIN_OUTLINED,
+            icon=Icons.LOGIN_OUTLINED,
             disabled=True,
             on_click=self.login_clicked,
         )

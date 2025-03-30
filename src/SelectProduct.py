@@ -13,7 +13,7 @@ from flet import (
     DataRow,
     IconButton,
     colors,
-    icons,
+    Icons,
 )
 from Database import ProductsDatabase
 
@@ -90,7 +90,7 @@ class SelectProduct(AlertDialog):
                         DataCell(Text(value=f"R${data[4]}")),
                         DataCell(
                             IconButton(
-                                icon=icons.SENSOR_OCCUPIED_ROUNDED,
+                                icon=Icons.SENSOR_OCCUPIED_ROUNDED,
                                 icon_color=colors.PRIMARY,
                                 tooltip="Selecionar",
                                 data=data[0],

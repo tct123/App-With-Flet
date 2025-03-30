@@ -1,5 +1,5 @@
 from flet import (
-    UserControl,
+    
     Row,
     Column,
     Container,
@@ -11,7 +11,7 @@ from flet import (
     DataRow,
     DataColumn,
     DataCell,
-    icons,
+    Icons,
     colors,
     TextStyle,
     Card,
@@ -34,7 +34,7 @@ from Reports import SaleReport
 import contextlib
 
 
-class Sales(UserControl):
+class Sales(Container):
     def __init__(self, route):
         super().__init__()
         self.route = route
@@ -43,27 +43,27 @@ class Sales(UserControl):
             label="Buscar...",
             expand=True,
             dense=True,
-            prefix_icon=icons.SEARCH_ROUNDED,
+            prefix_icon=Icons.SEARCH_ROUNDED,
             on_submit=self.find_sale,
         )
         self.btn_new_sale = IconButton(
-            icon=icons.ADD_SHOPPING_CART_ROUNDED,
+            icon=Icons.ADD_SHOPPING_CART_ROUNDED,
             icon_color=colors.PRIMARY,
             tooltip="Nova Venda",
             icon_size=36,
             on_click=self.new_sale_clicked,
         )
         self.btn_filter_today = IconButton(
-            icon=icons.TODAY_ROUNDED,
-            selected_icon=icons.TODAY_ROUNDED,
+            icon=Icons.TODAY_ROUNDED,
+            selected_icon=Icons.TODAY_ROUNDED,
             selected_icon_color=colors.PRIMARY,
             data="select_sales_from_today",
             tooltip="Vendas de Hoje",
             on_click=self.filter_buttons_clicked,
         )
         self.btn_filter_previous_seven = IconButton(
-            icon=icons.DATE_RANGE_ROUNDED,
-            selected_icon=icons.DATE_RANGE_ROUNDED,
+            icon=Icons.DATE_RANGE_ROUNDED,
+            selected_icon=Icons.DATE_RANGE_ROUNDED,
             selected_icon_color=colors.PRIMARY,
             selected=True,
             data="select_sales_from_previous_seven",
@@ -71,16 +71,16 @@ class Sales(UserControl):
             on_click=self.filter_buttons_clicked,
         )
         self.btn_filter_previous_thirty = IconButton(
-            icon=icons.CALENDAR_MONTH_ROUNDED,
-            selected_icon=icons.CALENDAR_MONTH_ROUNDED,
+            icon=Icons.CALENDAR_MONTH_ROUNDED,
+            selected_icon=Icons.CALENDAR_MONTH_ROUNDED,
             selected_icon_color=colors.PRIMARY,
             data="select_sales_from_previous_tirthy",
             tooltip="Vendas dos Últimos Trinta Dias",
             on_click=self.filter_buttons_clicked,
         )
         self.btn_filter_all = IconButton(
-            icon=icons.APPS_ROUNDED,
-            selected_icon=icons.APPS_ROUNDED,
+            icon=Icons.APPS_ROUNDED,
+            selected_icon=Icons.APPS_ROUNDED,
             selected_icon_color=colors.PRIMARY,
             tooltip="Mostrar Todas as Vendas",
             data="select_all_sales",
@@ -136,7 +136,7 @@ class Sales(UserControl):
             text_style=TextStyle(weight=FontWeight.BOLD),
         )
         self.btn_print = IconButton(
-            icon=icons.PICTURE_AS_PDF_OUTLINED,
+            icon=Icons.PICTURE_AS_PDF_OUTLINED,
             tooltip="Gerar arquivo .pdf",
             icon_color="primary",
             on_click=self.pdf_clicked,
@@ -329,7 +329,7 @@ class Sales(UserControl):
                                     controls=[
                                         IconButton(
                                             data=data[0],
-                                            icon=icons.EDIT_OUTLINED,
+                                            icon=Icons.EDIT_OUTLINED,
                                             icon_color=colors.PRIMARY,
                                             tooltip="Editar Venda",
                                             scale=0.9,
@@ -342,7 +342,7 @@ class Sales(UserControl):
                                         ),
                                         IconButton(
                                             data=data[0],
-                                            icon=icons.DELETE_OUTLINED,
+                                            icon=Icons.DELETE_OUTLINED,
                                             icon_color=colors.ERROR,
                                             tooltip="Excluir Venda",
                                             scale=0.9,

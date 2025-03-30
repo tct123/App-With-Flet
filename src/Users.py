@@ -1,5 +1,4 @@
 from flet import (
-    UserControl,
     Row,
     Column,
     Container,
@@ -10,7 +9,7 @@ from flet import (
     DataRow,
     DataColumn,
     DataCell,
-    icons,
+    Icons,
     VerticalDivider,
     ListView,
     Dropdown,
@@ -28,7 +27,7 @@ from ConfirmDialog import ConfirmDialog
 from Notification import Notification
 
 
-class Users(UserControl):
+class Users(Container):
     def __init__(self, route):
         super().__init__()
         self.route = route
@@ -54,8 +53,8 @@ class Users(UserControl):
                         DataCell(
                             Row(
                                 [
-                                    IconButton(icon=icons.EDIT, icon_color="blue"),
-                                    IconButton(icon=icons.DELETE, icon_color="red"),
+                                    IconButton(icon=Icons.EDIT, icon_color="blue"),
+                                    IconButton(icon=Icons.DELETE, icon_color="red"),
                                 ]
                             )
                         ),
@@ -68,13 +67,13 @@ class Users(UserControl):
         self.tf_name = TextField(
             autofocus=True,
             label="Nome",
-            prefix_icon=icons.PERSON_2_ROUNDED,
+            prefix_icon=Icons.PERSON_2_ROUNDED,
             on_change=self.analyze_register_user,
             on_focus=self.on_enter_fields,
         )
         self.tf_user = TextField(
             label="Usuário",
-            prefix_icon=icons.ASSIGNMENT_IND_ROUNDED,
+            prefix_icon=Icons.ASSIGNMENT_IND_ROUNDED,
             on_change=self.analyze_register_user,
             on_focus=self.on_enter_fields,
         )
@@ -82,34 +81,34 @@ class Users(UserControl):
             label="Acesso",
             options=[dropdown.Option("Usuario"), dropdown.Option("Admin")],
             value="Admin",
-            prefix_icon=icons.MANAGE_ACCOUNTS_ROUNDED,
+            prefix_icon=Icons.MANAGE_ACCOUNTS_ROUNDED,
             on_change=self.analyze_register_user,
             on_focus=self.on_enter_fields,
         )
         self.tf_pass1 = TextField(
             label="Insira a senha",
             password=True,
-            prefix_icon=icons.PASSWORD,
+            prefix_icon=Icons.PASSWORD,
             on_change=self.analyze_register_user,
             on_focus=self.on_enter_fields,
         )
         self.tf_pass2 = TextField(
             label="Repita a senha",
             password=True,
-            prefix_icon=icons.PASSWORD,
+            prefix_icon=Icons.PASSWORD,
             on_change=self.analyze_register_user,
             on_focus=self.on_enter_fields,
         )
         self.btn_register_user = OutlinedButton(
             text="Cadastrar",
             disabled=True,
-            icon=icons.ADD_OUTLINED,
+            icon=Icons.ADD_OUTLINED,
             width=140,
             on_click=self.btn_save_edit_clicked,
         )
         self.btn_cancel_edition = OutlinedButton(
             text="Cancelar",
-            icon=icons.CANCEL_OUTLINED,
+            icon=Icons.CANCEL_OUTLINED,
             visible=False,
             width=140,
             on_click=self.edit_cancelled,
@@ -276,14 +275,14 @@ class Users(UserControl):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.EDIT_OUTLINED,
+                                        icon=Icons.EDIT_OUTLINED,
                                         icon_color="blue",
                                         tooltip="Editar",
                                         data=data,
                                         on_click=self.edit_clicked,
                                     ),
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         tooltip="Excluir",
                                         data=data,
@@ -478,14 +477,14 @@ class Users(UserControl):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.EDIT_OUTLINED,
+                                        icon=Icons.EDIT_OUTLINED,
                                         icon_color="blue",
                                         tooltip="Editar",
                                         data=data,
                                         on_click=self.edit_clicked,
                                     ),
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         tooltip="Excluir",
                                         data=data,

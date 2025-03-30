@@ -1,5 +1,4 @@
 from flet import (
-    UserControl,
     Row,
     Column,
     Container,
@@ -12,7 +11,7 @@ from flet import (
     DataRow,
     DataColumn,
     DataCell,
-    icons,
+    Icons,
     colors,
     TextThemeStyle,
     TextAlign,
@@ -29,7 +28,7 @@ from Database import ProductsDatabase, SalesDatabase
 from Validator import Validator
 
 
-class RegisterProducts(UserControl):
+class RegisterProducts(Container):
     def __init__(self, route):
         super().__init__()
         self.route = route
@@ -49,14 +48,14 @@ class RegisterProducts(UserControl):
             label="Categoria", expand=2, on_change=self.analyze_fields
         )
         self.btn_manage_categories = IconButton(
-            icon=icons.ADD_CIRCLE_OUTLINE,
+            icon=Icons.ADD_CIRCLE_OUTLINE,
             icon_color=colors.PRIMARY,
             icon_size=32,
             on_click=self.manage_categories_clicked,
         )
         self.dp_brand = Dropdown(label="Marca", expand=2, on_change=self.analyze_fields)
         self.btn_manage_brands = IconButton(
-            icon=icons.ADD_CIRCLE_OUTLINE,
+            icon=Icons.ADD_CIRCLE_OUTLINE,
             icon_color=colors.PRIMARY,
             icon_size=32,
             on_click=self.manage_brands_clicked,
@@ -111,11 +110,11 @@ class RegisterProducts(UserControl):
             on_blur=self.calc_selling_price,
         )
         self.btn_add_save_products = OutlinedButton(
-            text="Salvar", icon=icons.SAVE_OUTLINED, on_click=self.add_save_clicked
+            text="Salvar", icon=Icons.SAVE_OUTLINED, on_click=self.add_save_clicked
         )
         self.btn_back = IconButton(
             tooltip='Voltar para "Produtos"',
-            icon=icons.ARROW_BACK_OUTLINED,
+            icon=Icons.ARROW_BACK_OUTLINED,
             icon_size=32,
             on_click=self.back_clicked,
         )
@@ -556,7 +555,7 @@ class RegisterProducts(UserControl):
                         ),
                         DataCell(
                             IconButton(
-                                icon=icons.VISIBILITY_OUTLINED,
+                                icon=Icons.VISIBILITY_OUTLINED,
                                 icon_color="blue",
                                 tooltip="Ver pedido",
                                 data=data[0],

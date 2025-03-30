@@ -1,5 +1,4 @@
 from flet import (
-    UserControl,
     Row,
     Column,
     Container,
@@ -11,7 +10,7 @@ from flet import (
     DataRow,
     DataColumn,
     DataCell,
-    icons,
+    Icons,
     AlertDialog,
     TextThemeStyle,
     TextAlign,
@@ -29,7 +28,7 @@ from Notification import Notification
 from Validator import Validator
 
 
-class RegisterCustomer(UserControl):
+class RegisterCustomer(Container):
     def __init__(self, route):
         super().__init__()
         self.route = route
@@ -67,16 +66,16 @@ class RegisterCustomer(UserControl):
         )
         self.btn_add_adress = IconButton(
             tooltip="Adicionar Endereço",
-            icon=icons.ADD_ROAD_OUTLINED,
+            icon=Icons.ADD_ROAD_OUTLINED,
             icon_size=32,
             on_click=self.add_adress_clicked,
         )
         self.btn_add_save_customer = OutlinedButton(
-            text="Salvar", icon=icons.SAVE_OUTLINED, on_click=self.add_save_clicked
+            text="Salvar", icon=Icons.SAVE_OUTLINED, on_click=self.add_save_clicked
         )
         self.btn_back = IconButton(
             tooltip="Voltar",
-            icon=icons.ARROW_BACK_OUTLINED,
+            icon=Icons.ARROW_BACK_OUTLINED,
             icon_size=32,
             on_click=self.back_clicked,
         )
@@ -291,7 +290,7 @@ class RegisterCustomer(UserControl):
                         Row(
                             [
                                 IconButton(
-                                    icon=icons.DELETE_OUTLINED,
+                                    icon=Icons.DELETE_OUTLINED,
                                     icon_color="red",
                                     data=len(self.adress_list) - 1,
                                     on_click=self.delete_adress,
@@ -331,7 +330,7 @@ class RegisterCustomer(UserControl):
                             Row(
                                 [
                                     IconButton(
-                                        icon=icons.DELETE_OUTLINED,
+                                        icon=Icons.DELETE_OUTLINED,
                                         icon_color="red",
                                         data=row,
                                         on_click=self.delete_adress,
@@ -553,7 +552,7 @@ class RegisterCustomer(UserControl):
                         DataCell(Text(f"R${Validator.format_to_currency(data[2])}")),
                         DataCell(
                             IconButton(
-                                icon=icons.VISIBILITY_OUTLINED,
+                                icon=Icons.VISIBILITY_OUTLINED,
                                 icon_color="blue",
                                 data=data[0],
                                 tooltip="Visualizar pedido",

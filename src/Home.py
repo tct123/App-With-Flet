@@ -4,7 +4,7 @@ from flet import (
     Container,
     Text,
     border,
-    colors,
+    Colors,
     margin,
     ChartAxisLabel,
     Card,
@@ -47,11 +47,11 @@ class Home(Container):
         super().__init__()
         self.route = route
         self.COLOR = [
-            colors.PRIMARY,
-            colors.SECONDARY,
-            colors.ON_PRIMARY_CONTAINER,
-            colors.TERTIARY,
-            colors.ON_SURFACE_VARIANT,
+            Colors.PRIMARY,
+            Colors.SECONDARY,
+            Colors.ON_PRIMARY_CONTAINER,
+            Colors.TERTIARY,
+            Colors.ON_SURFACE_VARIANT,
         ]
 
         ###### LineChart: ######
@@ -64,7 +64,7 @@ class Home(Container):
                     LineChartDataPoint(9, 29),
                 ],
                 stroke_width=4,
-                color=colors.PRIMARY,
+                color=Colors.PRIMARY,
                 curved=True,
                 stroke_cap_round=True,
                 point=True,
@@ -80,10 +80,10 @@ class Home(Container):
             horizontal_grid_lines=ChartGridLines(
                 width=0.5,
                 dash_pattern=[5, 5],
-                color=colors.with_opacity(0.4, colors.ON_SURFACE),
+                color=Colors.with_opacity(0.4, Colors.ON_SURFACE),
             ),
             border=Border(
-                bottom=BorderSide(2, colors.with_opacity(0.5, colors.ON_SURFACE))
+                bottom=BorderSide(2, Colors.with_opacity(0.5, Colors.ON_SURFACE))
             ),
             top_axis=ChartAxis(
                 title=Text(
@@ -103,7 +103,7 @@ class Home(Container):
                             Text(
                                 "SET",
                                 size=14,
-                                color=colors.ON_SURFACE,
+                                color=Colors.ON_SURFACE,
                             ),
                             margin=margin.only(top=10),
                         ),
@@ -114,7 +114,7 @@ class Home(Container):
                             Text(
                                 "OUT",
                                 size=14,
-                                color=colors.ON_SURFACE,
+                                color=Colors.ON_SURFACE,
                             ),
                             margin=margin.only(top=10),
                         ),
@@ -125,7 +125,7 @@ class Home(Container):
                             Text(
                                 "NOV",
                                 size=14,
-                                color=colors.ON_SURFACE,
+                                color=Colors.ON_SURFACE,
                             ),
                             margin=margin.only(top=10),
                         ),
@@ -136,7 +136,7 @@ class Home(Container):
                             Text(
                                 "DEC",
                                 size=14,
-                                color=colors.ON_SURFACE,
+                                color=Colors.ON_SURFACE,
                             ),
                             margin=margin.only(top=10),
                         ),
@@ -144,7 +144,7 @@ class Home(Container):
                 ],
                 labels_size=32,
             ),
-            tooltip_bgcolor=colors.with_opacity(1, colors.ON_PRIMARY),
+            tooltip_bgcolor=Colors.with_opacity(1, Colors.ON_PRIMARY),
             on_chart_event=self.on_line_chart_event,
         )
 
@@ -161,7 +161,7 @@ class Home(Container):
                             from_y=0,
                             to_y=0,
                             width=40,
-                            color=colors.PRIMARY,
+                            color=Colors.PRIMARY,
                             tooltip="",
                             border_radius=border_radius.vertical(top=5, bottom=0),
                         ),
@@ -174,7 +174,7 @@ class Home(Container):
                             from_y=0,
                             to_y=0,
                             width=40,
-                            color=colors.SECONDARY,
+                            color=Colors.SECONDARY,
                             tooltip="",
                             border_radius=border_radius.vertical(top=5, bottom=0),
                         ),
@@ -187,7 +187,7 @@ class Home(Container):
                             from_y=0,
                             to_y=0,
                             width=40,
-                            color=colors.ON_PRIMARY_CONTAINER,
+                            color=Colors.ON_PRIMARY_CONTAINER,
                             tooltip="",
                             border_radius=border_radius.vertical(top=5, bottom=0),
                         ),
@@ -200,7 +200,7 @@ class Home(Container):
                             from_y=0,
                             to_y=0,
                             width=40,
-                            color=colors.TERTIARY,
+                            color=Colors.TERTIARY,
                             tooltip="",
                             border_radius=border_radius.vertical(top=5, bottom=0),
                         ),
@@ -213,7 +213,7 @@ class Home(Container):
                             from_y=0,
                             to_y=0,
                             width=40,
-                            color=colors.INVERSE_PRIMARY,
+                            color=Colors.INVERSE_PRIMARY,
                             tooltip="",
                             border_radius=border_radius.vertical(top=5, bottom=0),
                         ),
@@ -221,7 +221,7 @@ class Home(Container):
                 ),
             ],
             border=border.only(
-                bottom=BorderSide(2, colors.with_opacity(0.5, colors.ON_SURFACE)),
+                bottom=BorderSide(2, Colors.with_opacity(0.5, Colors.ON_SURFACE)),
             ),
             left_axis=ChartAxis(labels_size=40, title_size=40),
             top_axis=ChartAxis(
@@ -254,11 +254,11 @@ class Home(Container):
                 labels_size=40,
             ),
             horizontal_grid_lines=ChartGridLines(
-                color=colors.with_opacity(0.4, colors.ON_SURFACE),
+                color=Colors.with_opacity(0.4, Colors.ON_SURFACE),
                 width=1,
                 dash_pattern=[5, 5],
             ),
-            tooltip_bgcolor=colors.with_opacity(1, colors.SURFACE),
+            tooltip_bgcolor=Colors.with_opacity(1, Colors.SURFACE),
             on_chart_event=self.on_bar_char_event,
         )
 
@@ -273,17 +273,17 @@ class Home(Container):
             sections=[
                 PieChartSection(
                     value=40,
-                    title_style=TextStyle(size=16, color=colors.WHITE),
-                    color=colors.with_opacity(0.8, colors.PRIMARY),
+                    title_style=TextStyle(size=16, color=Colors.WHITE),
+                    color=Colors.with_opacity(0.8, Colors.PRIMARY),
                     radius=42,
-                    border_side=border.BorderSide(0, color=colors.ON_PRIMARY_CONTAINER),
+                    border_side=border.BorderSide(0, color=Colors.ON_PRIMARY_CONTAINER),
                     badge=Container(
                         alignment=alignment.center,
                         width=40,
                         height=40,
-                        border=border.all(1, colors.PRIMARY),
+                        border=border.all(1, Colors.PRIMARY),
                         border_radius=20,
-                        bgcolor=colors.with_opacity(0.7, colors.SURFACE),
+                        bgcolor=Colors.with_opacity(0.7, Colors.SURFACE),
                         content=Text("40%", weight=FontWeight.BOLD),
                     ),
                     badge_position=1,
@@ -291,9 +291,9 @@ class Home(Container):
                 PieChartSection(
                     value=60,
                     title_style=TextStyle(
-                        size=16, color=colors.WHITE, weight=FontWeight.BOLD
+                        size=16, color=Colors.WHITE, weight=FontWeight.BOLD
                     ),
-                    color=colors.with_opacity(0.5, colors.SECONDARY_CONTAINER),
+                    color=Colors.with_opacity(0.5, Colors.SECONDARY_CONTAINER),
                     # radius=30,
                 ),
             ],
@@ -302,7 +302,7 @@ class Home(Container):
         ###### Cards: ######
         self.line_chart_card = Card(
             expand=5,
-            surface_tint_color=colors.SURFACE_VARIANT,
+            surface_tint_color=Colors.SURFACE_VARIANT,
             elevation=10.0,
             content=Container(
                 padding=25,
@@ -313,7 +313,7 @@ class Home(Container):
 
         self.gauge_card = Card(
             expand=3,
-            surface_tint_color=colors.SURFACE_VARIANT,
+            surface_tint_color=Colors.SURFACE_VARIANT,
             elevation=10.0,
             content=Container(
                 padding=20,
@@ -336,7 +336,7 @@ class Home(Container):
 
         self.bar_chart_card = Card(
             expand=5,
-            surface_tint_color=colors.SURFACE_VARIANT,
+            surface_tint_color=Colors.SURFACE_VARIANT,
             elevation=10.0,
             content=Container(
                 padding=20,
@@ -348,10 +348,10 @@ class Home(Container):
         self.text_registered_customers = Text(
             value="25",
             style=TextThemeStyle.DISPLAY_LARGE,
-            color=colors.PRIMARY,
+            color=Colors.PRIMARY,
             weight=FontWeight.BOLD,
         )
-        self.text_variation_customers = Text("5%", color=colors.GREEN, size=22)
+        self.text_variation_customers = Text("5%", color=Colors.GREEN, size=22)
         self.btn_add_customer = OutlinedButton(
             text="Ad. Cliente",
             icon=Icons.ADD_OUTLINED,
@@ -360,7 +360,7 @@ class Home(Container):
         self.icon = Icon(name=Icons.ARROW_DROP_UP, color="green")
         self.customer_card = Card(
             expand=True,
-            surface_tint_color=colors.SURFACE_VARIANT,
+            surface_tint_color=Colors.SURFACE_VARIANT,
             elevation=10,
             content=Container(
                 padding=20,
@@ -412,16 +412,16 @@ class Home(Container):
         self.text_today_sales = Text(
             value="10",
             style=TextThemeStyle.DISPLAY_LARGE,
-            color=colors.PRIMARY,
+            color=Colors.PRIMARY,
             weight=FontWeight.BOLD,
         )
-        self.text_today_billing = Text(value="R$0,00", color=colors.GREEN, size=22)
+        self.text_today_billing = Text(value="R$0,00", color=Colors.GREEN, size=22)
         self.btn_add_sale = OutlinedButton(
             text="Nova Venda", icon=Icons.ADD_OUTLINED, on_click=self.add_sale_clicked
         )
         self.sales_card = Card(
             expand=True,
-            surface_tint_color=colors.SURFACE_VARIANT,
+            surface_tint_color=Colors.SURFACE_VARIANT,
             elevation=10,
             content=Container(
                 padding=20,
@@ -475,11 +475,11 @@ class Home(Container):
         self.text_numb_of_products = Text(
             value="105",
             style=TextThemeStyle.DISPLAY_LARGE,
-            color=colors.PRIMARY,
+            color=Colors.PRIMARY,
             weight=FontWeight.BOLD,
         )
         self.text_low_stock = Text(
-            color=colors.GREEN,
+            color=Colors.GREEN,
             size=22,
             spans=[
                 TextSpan(
@@ -496,7 +496,7 @@ class Home(Container):
         )
         self.products_card = Card(
             expand=True,
-            surface_tint_color=colors.SURFACE_VARIANT,
+            surface_tint_color=Colors.SURFACE_VARIANT,
             elevation=10,
             content=Container(
                 padding=20,
@@ -611,10 +611,10 @@ class Home(Container):
 
     def on_pie_chart_event(self, e: PieChartEvent):
         if e.type == "PointerHoverEvent":
-            self.pie_stock.sections[0].color = colors.PRIMARY
+            self.pie_stock.sections[0].color = Colors.PRIMARY
             self.pie_stock.sections[0].radius = 40
         else:
-            self.pie_stock.sections[0].color = colors.with_opacity(0.8, colors.PRIMARY)
+            self.pie_stock.sections[0].color = Colors.with_opacity(0.8, Colors.PRIMARY)
             self.pie_stock.sections[0].radius = 42
 
         self.pie_stock.update()
@@ -625,7 +625,7 @@ class Home(Container):
                 BoxShadow(
                     spread_radius=8,
                     blur_radius=5,
-                    color=colors.PRIMARY,
+                    color=Colors.PRIMARY,
                     offset=Offset(1, 1),
                     blur_style=ShadowBlurStyle.NORMAL,
                 )
@@ -639,9 +639,9 @@ class Home(Container):
             for rod in group.bar_rods:
                 # rod.border_radius = border_radius.vertical(top=20, bottom=0) if e.group_index == group_index and e.type == "PointerHoverEvent" else border_radius.vertical(top=6, bottom=0)
                 rod.color = (
-                    colors.with_opacity(0.5, self.COLOR[group_index])
+                    Colors.with_opacity(0.5, self.COLOR[group_index])
                     if e.group_index == group_index and e.type == "PointerHoverEvent"
-                    else colors.with_opacity(1, self.COLOR[group_index])
+                    else Colors.with_opacity(1, self.COLOR[group_index])
                 )
                 if e.type == "PointerHoverEvent":
                     rod.width = 42
@@ -665,7 +665,7 @@ class Home(Container):
                     LineChartDataPoint(9, data[3]),
                 ],
                 stroke_width=4,
-                color=colors.PRIMARY,
+                color=Colors.PRIMARY,
                 curved=True,
                 stroke_cap_round=True,
                 point=True,

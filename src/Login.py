@@ -5,7 +5,7 @@ from flet import (
     Text,
     TextField,
     Icons,
-    colors,
+    Colors,
     TextThemeStyle,
     OutlinedButton,
     MainAxisAlignment,
@@ -60,14 +60,14 @@ class Login(Container):
                 controls=[
                     Container(
                         padding=padding.only(60, 34, 60, 20),
-                        bgcolor=colors.SURFACE,
+                        bgcolor=Colors.SURFACE,
                         border_radius=10,
                         width=500,
                         height=360,
                         shadow=BoxShadow(
                             spread_radius=5,
                             blur_radius=5,
-                            color=colors.GREY_300,
+                            color=Colors.GREY_300,
                             offset=Offset(1, 1),
                             blur_style=ShadowBlurStyle.NORMAL,
                         ),
